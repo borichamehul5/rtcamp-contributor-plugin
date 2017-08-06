@@ -27,17 +27,6 @@ function rtcamp_contributors_content($post) {
 		) 
 	);
 
-    /*
-    //Get list of WordPress Users who are not subscriber or contributor
-	$blogusers = get_users(array('role__not_in' => array(
-			'Subscriber', 'Contributor'
-		),
-		'orderby' => 'registered',
-		'order' => 'DESC'
-
-		));
-	*/
-
 	//Generate Nonce for Additonal Security as per WordPress Standards
 	wp_nonce_field('1d9fe805f4b1ec59873a46bd299b9a60', 'rtcamp_contributors_nonce');
 
