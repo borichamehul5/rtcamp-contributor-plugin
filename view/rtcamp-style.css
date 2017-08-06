@@ -1,0 +1,13 @@
+.rtcamp_contributors_box{
+	border-style: solid;
+	border: 3;
+	padding: 10px;
+}
+.rtcamp_contributors img{
+	float: left;
+}
+.rtcamp_contributors a{
+	text-decoration: none!important;
+    -webkit-box-shadow: none!important;
+	box-shadow: none!important;
+}
