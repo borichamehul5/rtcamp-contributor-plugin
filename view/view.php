@@ -39,7 +39,7 @@ function rtcamp_contributors_view($content) {
 		$userdata = get_userdata($user);
 
 		//If user with given ID exists
-		if ($userdata != FALSE) {
+		if ($userdata!=FALSE) {
 			$box = $box . '<div class="rtcamp_contributors">' . get_avatar($user, 40) . '&nbsp;&nbsp;<a href="' . get_author_posts_url($user) . '">' . $userdata->display_name . '</a></div><br/>';
 			$flag++;
 		}

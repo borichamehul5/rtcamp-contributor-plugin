@@ -14,13 +14,13 @@ function rtcamp_contributors() {
 //Contributor Meta Box Render Function
 function rtcamp_contributors_content($post) {
 	
-    //Get Custom Fields for the Post
+	//Get Custom Fields for the Post
 	$post_custom = get_post_custom($post->ID);
 
-    //Explode the list of users to array for search purpose
+	//Explode the list of users to array for search purpose
 	$user_ids = explode(',', $post_custom['rtcamp_contributors_list'][0]);
 
-    //Get list of WordPress Users
+	//Get list of WordPress Users
 	$blogusers = get_users(array(
 		'orderby' => 'registered',
 		'order'   => 'DESC'
@@ -59,9 +59,9 @@ function rtcamp_contributors_save($post_id) {
 		return;
 	}
 
-    //Save the Contributor Meta Box data
+	//Save the Contributor Meta Box data
 	if (isset($_POST['rtcamp_contributors_list'])) {
-		update_post_meta($post_id, 'rtcamp_contributors_list', implode (',', array_map('esc_attr', $_POST['rtcamp_contributors_list'])));
+		update_post_meta($post_id, 'rtcamp_contributors_list', implode(',', array_map('esc_attr', $_POST['rtcamp_contributors_list'])));
 	}
 
 }
