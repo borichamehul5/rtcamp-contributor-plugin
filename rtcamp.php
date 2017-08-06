@@ -11,14 +11,14 @@ License:     GPLv2
 */
 
 //Prevent Direct Access to File (Only WordPress Can Access)
-if(!defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
 //Include Admin Panel File
-require_once (plugin_dir_path(__FILE__)  . 'admin/admin.php');
+require_once (plugin_dir_path(__FILE__) . 'admin/admin.php');
 
 //Include Frontend View File
-require_once (plugin_dir_path(__FILE__)  . 'view/view.php');
+require_once (plugin_dir_path(__FILE__) . 'view/view.php');
 
 
