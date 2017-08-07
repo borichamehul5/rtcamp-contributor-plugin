@@ -1,5 +1,5 @@
 === rtCamp Contributor Plugin ===
-Contributors: borichamehul5
+Author: borichamehul5
 Donate link: https://www.techrrival.com
 Tags: contributor
 Requires at least: 4.6
@@ -9,7 +9,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-* rtCamp Contributo plugin is used to display list of contributors on the WordPress Post. You can select from the list of all WordPress users from post edit page.
+* rtCamp Contributor plugin is used to display list of contributors on the WordPress Post. You can select from the list of all WordPress users from post edit page.
 
 == Installation ==
 
