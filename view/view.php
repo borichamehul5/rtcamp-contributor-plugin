@@ -2,7 +2,7 @@
 
 //Prevent Direct Access to File (Only WordPress Can Access)
 if (!defined('ABSPATH')) {
-	die( 'No script kiddies please!' );
+	die('No script kiddies please!');
 }
 
 //Add Filter to Display Contributor Box (Frontend)

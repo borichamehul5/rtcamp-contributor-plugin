@@ -2,7 +2,7 @@
 
 //Prevent Direct Access to File (Only WordPress Can Access)
 if (!defined('ABSPATH')) {
-	die( 'No script kiddies please!' );
+	die('No script kiddies please!');
 }
 
 //Add Action to Display Contributor Meta Box in Admin
