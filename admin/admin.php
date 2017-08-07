@@ -1,5 +1,10 @@
 <?php
 
+//Prevent Direct Access to File (Only WordPress Can Access)
+if (!defined('ABSPATH')) {
+	die( 'No script kiddies please!' );
+}
+
 //Add Action to Display Contributor Meta Box in Admin
 add_action('add_meta_boxes', 'rtcamp_contributors');
 

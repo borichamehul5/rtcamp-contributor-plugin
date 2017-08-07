@@ -12,7 +12,7 @@ License:     GPLv2
 
 //Prevent Direct Access to File (Only WordPress Can Access)
 if (!defined('ABSPATH')) {
-	exit;
+	die( 'No script kiddies please!' );
 }
 
 //Include Admin Panel File
