@@ -30,8 +30,8 @@ You don't need to worry about that because before displaying the list of contrib
 
 == Screenshots ==
 
-1. /screenshot/one.jpg shows post editor meta box.
-2. /screenshot/one.jpg shows contributors box at the end of post.
+1. /screenshots/one.jpg shows post editor meta box.
+2. /screenshots/two.jpg shows contributors box at the end of post.
 
 == Changelog ==
 
