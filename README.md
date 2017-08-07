@@ -25,11 +25,11 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 ## Frequently Asked Questions
 
-- Will uninstalling or deactivating the plugin will remove the contributor data from the post? =
+- Will uninstalling or deactivating the plugin will remove the contributor data from the post?
 
 No it will not. However we are going to add an option to clear it incase you want to permanently delete the plugin and make the database clean.
 
-- What if selected contributor account gets deleted? =
+- What if selected contributor account gets deleted?
 
 You don't need to worry about that because before displaying the list of contributors at the end of the post, the plugin will check whether the user exists in the database.
 
