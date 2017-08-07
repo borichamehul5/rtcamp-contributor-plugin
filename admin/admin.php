@@ -8,6 +8,11 @@ add_action('save_post', 'rtcamp_contributors_save');
 
 //Contributor Meta Box Function
 function rtcamp_contributors() {
+
+	if (!current_user_can('publish_posts')) {
+		return;
+	}
+
 	add_meta_box('contributors', 'Contributors', 'rtcamp_contributors_content', 'post', 'normal', 'high');
 }
 
@@ -55,7 +60,7 @@ function rtcamp_contributors_save($post_id) {
 	}
 
 	//Check Permission for Current User
-	if (!current_user_can('edit_post')) {
+	if (!current_user_can('publish_posts')) {
 		return;
 	}
 

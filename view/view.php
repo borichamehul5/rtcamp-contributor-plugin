@@ -62,6 +62,6 @@ function rtcamp_contributors_view($content) {
 function rtcamp_contributors_styles() {
 
 	//Register Style Sheet
-	wp_register_style('rtcamp_contributors', plugins_url('rtcamp-contributors/view/rtcamp-style.css'));
+	wp_register_style('rtcamp_contributors', plugins_url('rtcamp-contributor-plugin/view/rtcamp-style.css'));
 
 }
