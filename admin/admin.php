@@ -50,12 +50,12 @@ function rtcamp_contributors_content($post) {
  		$userdetails=$user->user_login;
 
  		//If First Name of User is Available
- 		if(isset($user->first_name)) {
+ 		if($user->first_name!="") {
 
  			$userdetails = $userdetails." (".$user->first_name;
 
  			//If Last Name of User is Available
- 			if(isset($user->last_name)) {
+ 			if($user->last_name!="") {
  				$userdetails = $userdetails." ".$user->last_name;
  			}
 
