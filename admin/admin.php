@@ -63,11 +63,11 @@ function rtcamp_contributors_content($post) {
  		}
 
  		//For post author
-		if (wp_get_current_user()->ID == $user->ID) {
+		if (wp_get_current_user()->ID==$user->ID) {
 			echo '<input type="checkbox" checked disabled>' . esc_html($user->user_login) . '<br/>';
 		}
 		//If user checked as contributor
-		elseif ( in_array($user->ID, $user_ids) ) {
+		elseif (in_array($user->ID, $user_ids)) {
 			echo '<input type="checkbox" name="rtcamp_contributors_list[]" value="' . $user->ID . '" checked>' . esc_html($userdetails) . '<br/>';
 		}
 		//Else

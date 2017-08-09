@@ -77,17 +77,17 @@ function rtcamp_contributors_styles() {
 //Change Query to List Post Where user is Contributor or Author
 function archive_meta_query($query) {
 
-    //If it is author page
-	if ($query->is_author){
+	//If it is author page
+	if ($query->is_author) {
 
     	//Initialize global wpdb variable
 		global $wpdb;
 
     	//Get author data
-		$author_data = get_user_by('slug', get_query_var( 'author_name' ));
+		$author_data = get_user_by('slug', get_query_var('author_name'));
 
     	//Find IDs of posts where user is author or contributor
-		$results = $wpdb->get_results( "SELECT post_id FROM ".$wpdb->prefix."postmeta WHERE meta_key='rtcamp_contributors_list' AND FIND_IN_SET(".($author_data->ID).",meta_value)");
+		$results = $wpdb->get_results("SELECT post_id FROM " . $wpdb->prefix . "postmeta WHERE meta_key='rtcamp_contributors_list' AND FIND_IN_SET(" . ($author_data->ID) . ",meta_value)");
 
     	//Initialize empty array to store IDs of posts
 		$post_ids = array();
@@ -104,40 +104,42 @@ function archive_meta_query($query) {
       	//Change author name to blank to list all the posts from the database
 		$query->query_vars["author_name"] = "";
 
-		if($cnt==0)
+		if ($cnt==0) {
       		//If there are no post
 			$query->query_vars["post__in"] = array("");
-		else
+		}
+		else {
 	        //List the specified post ids
 			$query->query_vars["post__in"] = $post_ids;
+		}
 
       	//Add action to change author archives title
-		add_filter( 'get_the_archive_title', 'archive_meta_title' );
+		add_filter('get_the_archive_title', 'archive_meta_title');
 	}
 
 }
 
 //Change author archive title
-function archive_meta_title( $title ) {
+function archive_meta_title($title) {
 
 	//Add action to show role before each post
-	add_action( 'loop_start', 'archive_contributor_role' );
+	add_action('loop_start', 'archive_contributor_role');
 
 	//Initialize global wp_query variable
 	global $wp_query;
 
 	//Return the new archive page title
-	return $wp_query->query['author_name']." is Author/Contributor of Following Posts";
+	return $wp_query->query['author_name'] . " is Author/Contributor of Following Posts";
 
 }
 
-function archive_contributor_role( $query ) {
+function archive_contributor_role($query) {
 
 	//If it is a main query (for skipping widgets recent posts and things that execute posts query)
-	if( $query->is_main_query() ) {
+	if($query->is_main_query()) {
 
-		add_action( 'the_post', 'archive_contributor_role_post' );
-		add_action( 'loop_end', 'archive_contributor_role_end' );
+		add_action('the_post', 'archive_contributor_role_post');
+		add_action('loop_end', 'archive_contributor_role_end');
 
 	}
 }
@@ -148,10 +150,9 @@ function archive_contributor_role_post() {
 	global $wp_query;
 
 	//If the user is author of the post
-	if(strtolower(get_the_author_meta('user_login'))==$wp_query->query['author_name']) {
+	if (strtolower(get_the_author_meta('user_login'))==$wp_query->query['author_name']) {
 		echo '<div style="background-color: green; text-align: center; color: white;"> Author </div>';
-	}
-	else {
+	} else {
 		echo '<div style="background-color: lightblue; text-align: center; color: white;"> Contributor </div>';
 	}
 }
@@ -159,5 +160,5 @@ function archive_contributor_role_post() {
 function archive_contributor_role_end() {
 
 	//If the main query is finished then remove action to skip widgets
-	remove_action( 'the_post', 'archive_contributor_role_post' );   
+	remove_action('the_post', 'archive_contributor_role_post');   
 }  
