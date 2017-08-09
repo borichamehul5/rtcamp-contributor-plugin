@@ -33,7 +33,8 @@ function rtcamp_contributors_content($post) {
 	//Get list of WordPress Users
 	$blogusers = get_users(array(
 		'orderby' => 'registered',
-		'order'   => 'DESC'
+		'order'   => 'DESC',
+    'who'     => 'authors'
 		) 
 	);
 
@@ -43,8 +44,35 @@ function rtcamp_contributors_content($post) {
 	//Add Scrolling Capability
 	echo '<div style="overflow-y:scroll; height:150px">';
 
-	foreach ($blogusers as $user) {
-		echo '<input type="checkbox" name="rtcamp_contributors_list[]" value="' . $user->ID . '" ' . (in_array($user->ID, $user_ids) ? 'checked' : '') . '>' . esc_html($user->user_login) . '<br/>';
+	foreach ($blogusers as $user) { 
+
+		//Initialize string to user login
+ 		$userdetails=$user->user_login;
+
+ 		//If First Name of User is Available
+ 		if(isset($user->first_name)) {
+
+ 			$userdetails = $userdetails." (".$user->first_name;
+
+ 			//If Last Name of User is Available
+ 			if(isset($user->last_name)) {
+ 				$userdetails = $userdetails." ".$user->last_name;
+ 			}
+
+ 			$userdetails = $userdetails.")";
+ 		}
+
+
+
+		if( wp_get_current_user()->ID == $user->ID ) {
+			echo '<input type="checkbox" checked disabled>' . esc_html($user->user_login) . '<br/>';
+		}
+		elseif( in_array($user->ID, $user_ids) ) {
+			echo '<input type="checkbox" name="rtcamp_contributors_list[]" value="' . $user->ID . '" checked>' . esc_html($userdetails) . '<br/>';
+		}
+  		else{
+  			echo '<input type="checkbox" name="rtcamp_contributors_list[]" value="' . $user->ID . '">' . esc_html($userdetails) . '<br/>';
+  		}
 	}
 
 	echo '</div>';
@@ -69,9 +97,17 @@ function rtcamp_contributors_save($post_id) {
 		return;
 	}
 
-	//Save the Contributor Meta Box data
+	//If Contributors are Selected
 	if (isset($_POST['rtcamp_contributors_list'])) {
-		update_post_meta($post_id, 'rtcamp_contributors_list', implode(',', array_map('esc_attr', $_POST['rtcamp_contributors_list'])));
+		$custom_meta = wp_get_current_user()->ID.','.implode(',', array_map('esc_attr', $_POST['rtcamp_contributors_list']));
 	}
+
+	//By default add the user creating the post
+	else {
+	  $custom_meta = wp_get_current_user()->ID;
+	}
+
+	//Save the Contributor Meta Box data
+	update_post_meta($post_id, 'rtcamp_contributors_list', $custom_meta);
 
 }
