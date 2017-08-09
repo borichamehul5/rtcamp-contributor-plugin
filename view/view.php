@@ -87,21 +87,29 @@ function archive_meta_query($query) {
     	$author_data=get_user_by( 'slug', get_query_var( 'author_name' ) );
 
     	//Find IDs of posts where user is author or contributor
-    	$results = $wpdb->get_results( "SELECT post_id FROM wp_postmeta WHERE meta_key='rtcamp_contributors_list' AND FIND_IN_SET(".($author_data->ID).",meta_value)");
+    	$results = $wpdb->get_results( "SELECT post_id FROM ".$wpdb->prefix."postmeta WHERE meta_key='rtcamp_contributors_list' AND FIND_IN_SET(".($author_data->ID).",meta_value)");
 
     	//Initialize empty array to store IDs of posts
     	$post_ids = array();
 
+      	//Initialize count to 0
+      	$cnt = 0;
+
     	//Store post ids one by one
     	foreach($results as $row) {
     		array_push($post_ids, $row->post_id);
+      	 	$cnt++;
     	}
 
       	//Change author name to blank to list all the posts from the database
       	$query->query_vars["author_name"] = "";
 
-      	//List the specified post ids
-      	$query->query_vars["post__in"] = $post_ids;
+      	if($cnt==0)
+      		//If there are no post
+        	$query->query_vars["post__in"] = array("");
+        else
+	        //List the specified post ids
+	      	$query->query_vars["post__in"] = $post_ids;
 
       	//Add action to change author archives title
       	add_filter( 'get_the_archive_title', 'archive_meta_title' );
@@ -140,7 +148,7 @@ function archive_contributor_role_post() {
 	global $wp_query;
 
 	//If the user is author of the post
-	if(get_the_author()==$wp_query->query['author_name']) {
+	if(strtolower(get_the_author_meta('user_login'))==$wp_query->query['author_name']) {
 		echo '<div style="background-color: green; text-align: center; color: white;"> Author </div>';
 	}
     else {
