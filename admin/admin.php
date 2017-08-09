@@ -30,11 +30,11 @@ function rtcamp_contributors_content($post) {
 	//Explode the list of users to array for search purpose
 	$user_ids = explode(',', $post_custom['rtcamp_contributors_list'][0]);
 
-	//Get list of WordPress Users
+	//Get list of WordPress Users who are not subscribers
 	$blogusers = get_users(array(
 		'orderby' => 'registered',
 		'order'   => 'DESC',
-    'who'     => 'authors'
+   		'who'     => 'authors'
 		) 
 	);
 
@@ -62,14 +62,15 @@ function rtcamp_contributors_content($post) {
  			$userdetails = $userdetails.")";
  		}
 
-
-
+ 		//For post author
 		if( wp_get_current_user()->ID == $user->ID ) {
 			echo '<input type="checkbox" checked disabled>' . esc_html($user->user_login) . '<br/>';
 		}
+		//If user checked as contributor
 		elseif( in_array($user->ID, $user_ids) ) {
 			echo '<input type="checkbox" name="rtcamp_contributors_list[]" value="' . $user->ID . '" checked>' . esc_html($userdetails) . '<br/>';
 		}
+		//Else
   		else{
   			echo '<input type="checkbox" name="rtcamp_contributors_list[]" value="' . $user->ID . '">' . esc_html($userdetails) . '<br/>';
   		}

@@ -20,5 +20,3 @@ require_once (plugin_dir_path(__FILE__) . 'admin/admin.php');
 
 //Include Frontend View File
 require_once (plugin_dir_path(__FILE__) . 'view/view.php');
-
-

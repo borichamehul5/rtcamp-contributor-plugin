@@ -39,8 +39,18 @@ You don't need to worry about that because before displaying the list of contrib
 ![Post Editor Meta Box](https://github.com/borichamehul5/rtcamp-contributor-plugin/blob/master/screenshots/one.JPG)
 2. /screenshots/two.jpg shows contributors box at the end of post.
 ![Frontend Contributor Box](https://github.com/borichamehul5/rtcamp-contributor-plugin/blob/master/screenshots/two.JPG)
+3. /screenshots/three.jpg shows author archive page.
+![Author Archive Page](https://github.com/borichamehul5/rtcamp-contributor-plugin/blob/master/screenshots/three.JPG)
 
 ## Changelog
+
+### 1.1
+- Subscribers will not be listed in contributor ment
+- Author of the post is by default contributor to that post
+- User's first and last name is shown in the post editor if available
+- Author Archive page will list all the posts of the user where he is a contributor or an author'
+- On Author Archive Page the little colored bar above all posts will show whether user is a contributor or author to that post
+- Author Archive Page title renamed
 
 ### 1.0
 - Plugin Created
