@@ -12,7 +12,7 @@ add_filter('the_content', 'rtcamp_contributors_view');
 add_action('wp_enqueue_scripts', 'rtcamp_contributors_styles');
 
 //Modify Author Archives
-add_action( 'pre_get_posts', 'archive_meta_query', 1 );
+add_action('pre_get_posts', 'archive_meta_query', 1);
 
 //Display Contributor Box at the end of the post
 function rtcamp_contributors_view($content) {
@@ -78,42 +78,42 @@ function rtcamp_contributors_styles() {
 function archive_meta_query($query) {
 
     //If it is author page
-    if ( $query->is_author){
+	if ($query->is_author){
 
     	//Initialize global wpdb variable
-    	global $wpdb;
+		global $wpdb;
 
     	//Get author data
-    	$author_data=get_user_by( 'slug', get_query_var( 'author_name' ) );
+		$author_data = get_user_by('slug', get_query_var( 'author_name' ));
 
     	//Find IDs of posts where user is author or contributor
-    	$results = $wpdb->get_results( "SELECT post_id FROM ".$wpdb->prefix."postmeta WHERE meta_key='rtcamp_contributors_list' AND FIND_IN_SET(".($author_data->ID).",meta_value)");
+		$results = $wpdb->get_results( "SELECT post_id FROM ".$wpdb->prefix."postmeta WHERE meta_key='rtcamp_contributors_list' AND FIND_IN_SET(".($author_data->ID).",meta_value)");
 
     	//Initialize empty array to store IDs of posts
-    	$post_ids = array();
+		$post_ids = array();
 
       	//Initialize count to 0
-      	$cnt = 0;
+		$cnt = 0;
 
     	//Store post ids one by one
-    	foreach($results as $row) {
-    		array_push($post_ids, $row->post_id);
-      	 	$cnt++;
-    	}
+		foreach ($results as $row) {
+			array_push($post_ids, $row->post_id);
+			$cnt++;
+		}
 
       	//Change author name to blank to list all the posts from the database
-      	$query->query_vars["author_name"] = "";
+		$query->query_vars["author_name"] = "";
 
-      	if($cnt==0)
+		if($cnt==0)
       		//If there are no post
-        	$query->query_vars["post__in"] = array("");
-        else
+			$query->query_vars["post__in"] = array("");
+		else
 	        //List the specified post ids
-	      	$query->query_vars["post__in"] = $post_ids;
+			$query->query_vars["post__in"] = $post_ids;
 
       	//Add action to change author archives title
-      	add_filter( 'get_the_archive_title', 'archive_meta_title' );
-    }
+		add_filter( 'get_the_archive_title', 'archive_meta_title' );
+	}
 
 }
 
@@ -134,12 +134,12 @@ function archive_meta_title( $title ) {
 function archive_contributor_role( $query ) {
 
 	//If it is a main query (for skipping widgets recent posts and things that execute posts query)
-    if( $query->is_main_query() ) {
+	if( $query->is_main_query() ) {
 
-        add_action( 'the_post', 'archive_contributor_role_post' );
-        add_action( 'loop_end', 'archive_contributor_role_end' );
+		add_action( 'the_post', 'archive_contributor_role_post' );
+		add_action( 'loop_end', 'archive_contributor_role_end' );
 
-    }
+	}
 }
 
 function archive_contributor_role_post() {
@@ -151,13 +151,13 @@ function archive_contributor_role_post() {
 	if(strtolower(get_the_author_meta('user_login'))==$wp_query->query['author_name']) {
 		echo '<div style="background-color: green; text-align: center; color: white;"> Author </div>';
 	}
-    else {
-    	echo '<div style="background-color: lightblue; text-align: center; color: white;"> Contributor </div>';
-    }
+	else {
+		echo '<div style="background-color: lightblue; text-align: center; color: white;"> Contributor </div>';
+	}
 }
 
 function archive_contributor_role_end() {
 
 	//If the main query is finished then remove action to skip widgets
-    remove_action( 'the_post', 'archive_contributor_role_post' );   
+	remove_action( 'the_post', 'archive_contributor_role_post' );   
 }  

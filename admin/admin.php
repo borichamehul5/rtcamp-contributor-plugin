@@ -47,31 +47,31 @@ function rtcamp_contributors_content($post) {
 	foreach ($blogusers as $user) { 
 
 		//Initialize string to user login
- 		$userdetails=$user->user_login;
+ 		$userdetails = $user->user_login;
 
  		//If First Name of User is Available
- 		if($user->first_name!="") {
+ 		if ($user->first_name!="") {
 
- 			$userdetails = $userdetails." (".$user->first_name;
+ 			$userdetails = $userdetails . " (" . $user->first_name;
 
  			//If Last Name of User is Available
- 			if($user->last_name!="") {
- 				$userdetails = $userdetails." ".$user->last_name;
+ 			if ($user->last_name!="") {
+ 				$userdetails = $userdetails . " " . $user->last_name;
  			}
 
- 			$userdetails = $userdetails.")";
+ 			$userdetails = $userdetails . ")";
  		}
 
  		//For post author
-		if( wp_get_current_user()->ID == $user->ID ) {
+		if (wp_get_current_user()->ID == $user->ID) {
 			echo '<input type="checkbox" checked disabled>' . esc_html($user->user_login) . '<br/>';
 		}
 		//If user checked as contributor
-		elseif( in_array($user->ID, $user_ids) ) {
+		elseif ( in_array($user->ID, $user_ids) ) {
 			echo '<input type="checkbox" name="rtcamp_contributors_list[]" value="' . $user->ID . '" checked>' . esc_html($userdetails) . '<br/>';
 		}
 		//Else
-  		else{
+  		else {
   			echo '<input type="checkbox" name="rtcamp_contributors_list[]" value="' . $user->ID . '">' . esc_html($userdetails) . '<br/>';
   		}
 	}
@@ -100,7 +100,7 @@ function rtcamp_contributors_save($post_id) {
 
 	//If Contributors are Selected
 	if (isset($_POST['rtcamp_contributors_list'])) {
-		$custom_meta = wp_get_current_user()->ID.','.implode(',', array_map('esc_attr', $_POST['rtcamp_contributors_list']));
+		$custom_meta = wp_get_current_user()->ID . ',' . implode(',', array_map('esc_attr', $_POST['rtcamp_contributors_list']));
 	}
 
 	//By default add the user creating the post
