@@ -4,7 +4,7 @@
 Plugin Name: rtCamp Contributors Plugin
 Plugin URI:  https://www.techrrival.com
 Description: Contributors Plugin For rtCamp
-Version:     1.0
+Version:     1.1
 Author:      Mehul Boricha
 Author URI:  https://www.mehulboricha.com
 License:     GPLv2
