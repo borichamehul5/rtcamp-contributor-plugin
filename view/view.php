@@ -124,11 +124,8 @@ function archive_meta_title($title) {
 	//Add action to show role before each post
 	add_action('loop_start', 'archive_contributor_role');
 
-	//Initialize global wp_query variable
-	global $wp_query;
-
 	//Return the new archive page title
-	return $wp_query->query['author_name'] . " is Author/Contributor of Following Posts";
+	return get_the_author() . " is Author/Contributor of Following Posts";
 
 }
 
